@@ -1,0 +1,134 @@
+import com.transgen.api.StateGenerator
+import com.transgen.api.enums.State
+
+public class WA extends StateGenerator {
+
+    public WA(String[] data) {
+        super(data, getFields(), State.WASHINGTON, "ANSI ", 3, 0);
+    }
+
+    protected static LinkedHashMap<String, LinkedHashMap<String, Integer>> getFields() {
+        LinkedHashMap<String, LinkedHashMap<String, Integer>> fields = new LinkedHashMap<String, LinkedHashMap<String, Integer>>();
+        LinkedHashMap<String, Integer> dl = new LinkedHashMap<String, Integer>();
+        dl.put("DCA", 0);
+        dl.put("DCB", 0);
+        dl.put("DCD", 0);
+        dl.put("DBA", 0);
+        dl.put("DCS", 0);
+        dl.put("DCT", 0);
+        dl.put("DCU", 0);
+        dl.put("DBD", 0);
+        dl.put("DBB", 0);
+        dl.put("DBC", 0);
+        dl.put("DAY", 0);
+        dl.put("DAU", 0);
+        dl.put("DCE", 0);
+        dl.put("DAG", 0);
+        dl.put("DAI", 0);
+        dl.put("DAJ", 0);
+        dl.put("DAK", 11);
+        dl.put("DAQ", 0);
+        dl.put("DCF", 0);
+        dl.put("DCG", 0);
+        dl.put("DCH", 0);
+
+        LinkedHashMap<String, Integer> zw = new LinkedHashMap<String, Integer>();
+        zw.put("ZWA", 0);
+        zw.put("ZWB", 0);
+        zw.put("ZWC", 0);
+        zw.put("ZWD", 0);
+        zw.put("ZWE", 0);
+        zw.put("ZWF", 0);
+
+        fields.put("DL", dl);
+        fields.put("ZW", zw);
+        return fields;
+    }
+
+    public LinkedHashMap<String, String> getExamples() {
+        LinkedHashMap<String, String> dl = new LinkedHashMap<String, String>();
+        dl.put("DAA","SMTIH,JOHN,J,");
+        dl.put("DAZ","BRO");
+        dl.put("DAW","130");
+        dl.put("DCB","");
+        dl.put("DAQ","934870146");
+        dl.put("DCA","D");
+        dl.put("DAK","72564 9654 ");
+        dl.put("DAJ","WA");
+        dl.put("DAI","SPRINGFIELD");
+        dl.put("DAG","111 1ST STREET");
+        dl.put("DDG","U");
+        dl.put("DDF","U");
+        dl.put("DAD","JOE");
+        dl.put("DDE","U");
+        dl.put("DAC","JOHN");
+        dl.put("DDD","0");
+        dl.put("DDB","08142012");
+        dl.put("DDA","N");
+        dl.put("DBD","02242014");
+        dl.put("DCS","SMITH");
+        dl.put("DBC","1");
+        dl.put("DBB","02191996");
+        dl.put("DBA","02192018");
+        dl.put("DCL","W");
+        dl.put("DCK","");
+        dl.put("DAY","BLU");
+        dl.put("DCG","USA");
+        dl.put("DCF","");
+        dl.put("DAU","073 in");
+        dl.put("DCD","M");
+        dl.put("ZAB","0509");
+        dl.put("ZAA","");
+        return dl;
+    }
+
+    @Override
+    String convertToFormattedDate(String date){
+        return date.substring(4,8) + date.substring(0,2) + date.substring(2,4);
+    }
+
+    @Override
+    String getHeader() {
+        return getCI() + getLF() + getRS() + getCR() + getFileType() + getIIN() + getVersion() + getJurisdiction() + getEntries()
+    }
+
+    @Override
+    String getCommonTerminal() {
+        return getLF()
+    }
+
+    @Override
+    String getEndTerminal() {
+        return getLF() + getCR()
+    }
+
+    @Override
+    Boolean finalTerminalOnly() {
+        return false
+    }
+
+    @Override
+    Boolean includeDocumentHeaders() {
+        return true
+    }
+
+    @Override
+    Boolean removeFinalTerminal() {
+        return false
+    }
+
+    @Override
+    public void generate2D(int width, int height) {
+        generatePDF417(generate2DData(), 17, 22, 6, width, height);
+    }
+
+    @Override
+    public void generate1D(int width, int height) {
+
+    }
+
+    public static int getExpectedVersion() {
+        return 1;
+    }
+}
+
